@@ -1,20 +1,23 @@
-# biodome-scheduler
-
-Alpha-quality command scheduler for Biodome, using cron syntax.
-
-```javascript
 import { parseSchedule, mostRecentCommandValue } from 'biodome-schedule';
-import client from './biodomeConnect';
 
+// setup client
+const client = {}; // TODO
 const refreshTime = 60 * 1000;
 const conf = parseSchedule([
   {
-    "id": "security_lights",
+    "id": "light",
     "schedule": [
-      [1, "00 19 ? * *"],
-      [0 , "00 07 ? * *"]
+      ["on", "00 10 ? * *"],
+      ["off" , "00 24 ? * *"]
     ]
-  }
+  },
+  {
+    "id": "alarm",
+    "schedule": [
+      ["on", "00 10 ? * *"],
+      ["off", "00 24 ? * *"],
+    ]
+  },
 ]);
 
 setInterval(function() {
@@ -25,4 +28,3 @@ setInterval(function() {
     });
   });
 }, refreshTime);
-```
